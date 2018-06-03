@@ -1,4 +1,5 @@
 require 'octokit'
+require_relative 'local'
 
 module GithubFlowCli
   class API
@@ -43,6 +44,14 @@ module GithubFlowCli
           return send(method, *args, &block)
         end
         super
+      end
+
+      # TODO: explicify options
+      # :assignee (String) — User login.
+      # :milestone (Integer) — Milestone number.
+      # :labels
+      def create_issue(title, body = nil, options = {})
+        @client.create_issue(Local.repo, title, body, options)
       end
 
       private
