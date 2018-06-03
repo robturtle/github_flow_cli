@@ -37,7 +37,10 @@ module GithubFlowCli
       # delegate API calls to Octokit::Client
       def method_missing(method, *args, &block)
         if @client.respond_to?(method)
-          return @client.send(method, *args, &block)
+          define_singleton_method(method) do |*args, &block|
+            @client.send(method, *args, &block)
+          end
+          return send(method, *args, &block)
         end
         super
       end
