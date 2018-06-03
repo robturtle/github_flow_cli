@@ -15,6 +15,11 @@ module GithubFlowCli
       retry
     end
 
+    desc "user", "display username"
+    def user
+      puts API.user[:login]
+    end
+
     private
 
     def authorize(username, password)
