@@ -13,6 +13,21 @@ module GithubFlowCli
     class << self
       attr_accessor *KEYS
 
+      def setup
+        if File.file?(config_path)
+          load
+          API.use_oauth_token(oauth_token)
+          unless API.valid?
+            puts "WARN: authentication failed, please retry login."
+            File.delete(config_path)
+            exit(1)
+          end
+        else
+          puts "please login first."
+          exit(2)
+        end
+      end
+
       def load
         YAML::load_file(config_path).each { |k, v| send("#{k}=", v) }
       ensure
@@ -38,16 +53,6 @@ module GithubFlowCli
       def config_path
         FileUtils.mkdir_p(CONFIG_DIR) unless File.directory?(CONFIG_DIR)
         File.join(CONFIG_DIR, CONFIG_FILE)
-      end
-    end
-
-    if File.file?(config_path)
-      load
-      API.use_oauth_token(oauth_token)
-      unless API.valid?
-        puts "WARN: authentication failed, please retry login."
-        File.delete(config_path)
-        exit(1)
       end
     end
   end

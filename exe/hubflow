@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require 'github_flow_cli/cli'
 begin
+  GithubFlowCli::Config.setup unless ARGV == ["login"]
   GithubFlowCli::CLI.start
-rescue SystemExit, Interrupt => e
-  puts "\n#{e.class} received, bye."
+rescue Interrupt => e
+  puts "\nbye."
 end
