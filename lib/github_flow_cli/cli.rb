@@ -2,9 +2,11 @@ require 'thor'
 
 module GithubFlowCli
   class CLI < Thor
-    desc "hello NAME", "say hello to NAME"
-    def hello(name)
-      puts "hello, #{name}"
+    desc "login", "login to Github with username and password"
+    def login
+      username = ask("Github username: ")
+      password = ask("password: ", echo: false)
+      puts "TODO: login to github OAuth"
     end
   end
 end
