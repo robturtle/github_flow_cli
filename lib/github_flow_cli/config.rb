@@ -8,8 +8,6 @@ module GithubFlowCli
     CONFIG_FILE = 'hubflow'
     KEYS = %w[username oauth_token]
 
-    class BadConfig < StandardError; end
-
     class << self
       attr_accessor *KEYS
 
@@ -30,15 +28,9 @@ module GithubFlowCli
 
       def load
         YAML::load_file(config_path).each { |k, v| send("#{k}=", v) }
-      ensure
-        unless valid?
-          puts "WARN: bad configuration #{to_h}"
-          KEYS.each { |k| send("#{k}=", nil) }
-        end
       end
 
       def save!
-        raise BadConfig, "bad configuration #{to_h}" unless valid?
         File.open(config_path, 'w') { |f| f.write(to_h.to_yaml) }
       end
 

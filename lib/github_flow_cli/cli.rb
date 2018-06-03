@@ -11,7 +11,7 @@ module GithubFlowCli
       Config.oauth_token = authorize(Config.username, password)
       Config.save!
       puts "\nsuccessfully login!"
-    rescue Config::BadConfig, Octokit::Unauthorized
+    rescue Octokit::Unauthorized
       puts "\nauthentication failed, please try again."
       retry
     end
@@ -27,7 +27,7 @@ module GithubFlowCli
       API.authorize(username, password)
     rescue Octokit::OneTimePasswordRequired
       two_factor_token = ask("\nTwo Factor Authentication code:")
-      API.authorize(Config.username, password, two_factor_token: two_factor_token)
+      API.authorize(username, password, two_factor_token: two_factor_token)
     end
   end
 end
