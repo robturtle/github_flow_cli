@@ -22,9 +22,9 @@ module GithubFlowCli
       puts API.user[:login]
     end
 
-    desc "repo", "display repo name"
+    desc "repo", "display remote repo name"
     def repo
-      puts Local.repo.slug
+      puts(Local.repo&.slug || "remote repo not found!")
     end
 
     private
