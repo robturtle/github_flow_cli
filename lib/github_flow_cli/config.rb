@@ -1,5 +1,6 @@
 require 'yaml'
 require 'fileutils'
+require_relative 'api'
 
 module GithubFlowCli
   class Config
@@ -42,6 +43,7 @@ module GithubFlowCli
 
     if File.file?(config_path)
       load
+      API.use_oauth_token(oauth_token)
     end
   end
 end

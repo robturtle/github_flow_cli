@@ -15,6 +15,18 @@ module GithubFlowCli
         end
         client.create_authorization(auth_config).token
       end
+
+      def use_oauth_token(token)
+        @client = Octokit::Client.new(access_token: token)
+      end
+
+      # delegate API calls to Octokit::Client
+      def method_missing(method, *args, &block)
+        if @client.respond_to?(method)
+          return @client.send(method, *args, &block)
+        end
+        super
+      end
     end
   end
 end
