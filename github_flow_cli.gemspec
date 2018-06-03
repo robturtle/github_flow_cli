@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "facets" # String#snakecase, common utils
   spec.add_dependency "git"
   spec.add_dependency "octokit" # Github API
   spec.add_dependency "thor" # CLI
