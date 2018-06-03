@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 require 'github_flow_cli/cli'
-GithubFlowCli::CLI.start
+begin
+  GithubFlowCli::CLI.start
+rescue SystemExit, Interrupt => e
+  puts "\n#{e.class} received, bye."
+end
