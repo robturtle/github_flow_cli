@@ -1,6 +1,7 @@
 require 'thor'
 require_relative 'api'
 require_relative 'config'
+require_relative 'local'
 
 module GithubFlowCli
   class CLI < Thor
@@ -19,6 +20,11 @@ module GithubFlowCli
     desc "user", "display username"
     def user
       puts API.user[:login]
+    end
+
+    desc "repo", "display repo name"
+    def repo
+      puts Local.repo.slug
     end
 
     private
