@@ -11,11 +11,16 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     byebug (10.0.2)
+    coderay (1.1.2)
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
+    method_source (0.9.0)
     multipart-post (2.0.0)
     octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.0.2)
     rake (10.5.0)
     sawyer (0.8.1)
@@ -30,6 +35,7 @@ DEPENDENCIES
   bundler (~> 1.16)
   byebug
   github_flow_cli!
+  pry
   rake (~> 10.0)
 
 BUNDLED WITH
