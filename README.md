@@ -7,7 +7,9 @@ This CLI tool is aiming to fasten the developing flow with Github by automating 
 This gem is not published yet. For now please clone the repo and run the app via:
 
 ```
-bundle exec exe/hubflow
+rake build
+gem install pkg/*.gem
+hubflow help
 ```
 
 ## Usage
