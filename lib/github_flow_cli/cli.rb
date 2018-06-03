@@ -29,7 +29,7 @@ module GithubFlowCli
       puts(Local.repo&.slug || "remote repo not found!")
     end
 
-    desc "issue", "manipulate issues"
+    desc "issue COMMAND", "manipulate issues"
     subcommand "issue", IssueCommands
 
     private
