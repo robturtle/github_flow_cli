@@ -1,5 +1,2 @@
 require "github_flow_cli/version"
-
-module GithubFlowCli
-  # Your code goes here...
-end
+require "github_flow_cli/cli"
