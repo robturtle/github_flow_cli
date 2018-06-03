@@ -7,7 +7,7 @@ module GithubFlowCli
       def authorize(username, password, two_factor_token: nil)
         client = Octokit::Client.new(login: username, password: password)
         auth_config = {
-          scopes: ['repo', 'admin:repo_hook'],
+          scopes: ['user', 'repo', 'admin:repo_hook'],
           note: app_name,
         }
         if two_factor_token
