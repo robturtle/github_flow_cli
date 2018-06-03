@@ -8,11 +8,20 @@ module GithubFlowCli
     def login
       Config.username = ask("Github username: ")
       password = ask("password: ", echo: false)
-      Config.oauth_token = API.login(Config.username, password)
+      Config.oauth_token = authorize(Config.username, password)
       Config.save!
     rescue Config::BadConfig
       puts "bad username or password, please try again."
       retry
+    end
+
+    private
+
+    def authorize(username, password)
+      API.authorize(username, password)
+    rescue Octokit::OneTimePasswordRequired
+      two_factor_token = ask("\nTwo Factor Authentication code: ")
+      API.authorize(Config.username, password, two_factor_token: two_factor_token)
     end
   end
 end
