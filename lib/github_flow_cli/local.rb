@@ -17,7 +17,7 @@ module GithubFlowCli
       end
 
       def git
-        Git.open(File.expand_path('.'))
+        @git ||= Git.open(File.expand_path('.'))
       end
     end
   end
