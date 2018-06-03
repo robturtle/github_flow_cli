@@ -12,7 +12,7 @@ module GithubFlowCli
       Config.save!
       puts "\nsuccessfully login!"
     rescue Config::BadConfig, Octokit::Unauthorized
-      puts "\nbad username or password, please try again."
+      puts "\nauthentication failed, please try again."
       retry
     end
 
