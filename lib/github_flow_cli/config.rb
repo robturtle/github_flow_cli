@@ -44,6 +44,11 @@ module GithubFlowCli
     if File.file?(config_path)
       load
       API.use_oauth_token(oauth_token)
+      unless API.valid?
+        puts "WARN: authentication failed, please retry login."
+        File.delete(config_path)
+        exit(1)
+      end
     end
   end
 end

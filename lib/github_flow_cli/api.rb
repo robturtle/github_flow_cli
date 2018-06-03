@@ -20,6 +20,12 @@ module GithubFlowCli
         @client = Octokit::Client.new(access_token: token)
       end
 
+      def valid?
+        !user[:login].nil?
+      rescue Octokit::Unauthorized
+        false
+      end
+
       # delegate API calls to Octokit::Client
       def method_missing(method, *args, &block)
         if @client.respond_to?(method)
