@@ -6,12 +6,14 @@ module GithubFlowCli
   class Config
     CONFIG_DIR = File.expand_path('~/.config')
     CONFIG_FILE = 'hubflow'
-    KEYS = %w[username oauth_token]
+    KEYS = %w[username oauth_token branch_issue_map pr_branch_map]
 
     class << self
       attr_accessor *KEYS
 
       def setup
+        self.branch_issue_map = {}
+        self.pr_branch_map = {}
         if File.file?(config_path)
           load
           API.use_oauth_token(oauth_token)
