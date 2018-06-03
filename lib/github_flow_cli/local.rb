@@ -3,7 +3,6 @@ require 'git'
 module GithubFlowCli
   class Local
     class << self
-      # assume the remote name is "origin"
       def repo
         url = Git.open(File.expand_path('.')).remote.url
         return nil unless url
