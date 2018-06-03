@@ -5,7 +5,7 @@ module GithubFlowCli
   class IssueCommands < Thor
     desc "create", "create an issue"
     def create(title)
-      puts API.create_issue(title).url
+      puts API.create_issue(title).html_url
     end
   end
 end
