@@ -32,6 +32,9 @@ module GithubFlowCli
     desc "issue COMMAND", "manipulate issues"
     subcommand "issue", IssueCommands
 
+    desc "pr COMMAND", "manipulate PR"
+    subcommand "pr", PrCommands
+
     private
 
     def authorize(username, password)
