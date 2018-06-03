@@ -19,6 +19,8 @@ module GithubFlowCli
           id = client.authorizations.find { |auth| auth[:note] == app_name }.id
           client.delete_authorization(id)
           retry
+        else
+          raise
         end
       end
 
