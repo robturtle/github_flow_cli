@@ -30,8 +30,8 @@ module GithubFlowCli
       issue = API.issue(Local.repo, number)
       # TODO: create branch based on RepoRules
       # TODO: abstarct tag from issue title
-      branch_name = "TAG_#{number}_#{branch_name(issue.title)}"
-      puts branch_name
+      branch_name = "i_#{number}_#{issue.title.gsub(/[^_\w\d ]/, '').snakecase}"
+      Local.git.branch(branch_name).checkout
     rescue Octokit::NotFound
       puts "issue not found!"
     end
@@ -51,10 +51,6 @@ module GithubFlowCli
 
     def assignee_field(show_assignee, issue)
       show_assignee ? " (#{issue.assignee.login})" : ''
-    end
-
-    def branch_name(title)
-      title.gsub(/[^_\w\d ]/, '').snakecase
     end
   end
 end
