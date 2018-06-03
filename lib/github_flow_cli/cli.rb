@@ -10,7 +10,8 @@ module GithubFlowCli
       password = ask("password:", echo: false)
       Config.oauth_token = authorize(Config.username, password)
       Config.save!
-    rescue Config::BadConfig
+      puts "\nsuccessfully login!"
+    rescue Config::BadConfig, Octokit::Unauthorized
       puts "\nbad username or password, please try again."
       retry
     end
