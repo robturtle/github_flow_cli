@@ -13,6 +13,7 @@ module GithubFlowCli
     desc "all", "get all open tickets"
     def all
       list_issues(assignee: '*', show_assignee: true)
+      list_issues(assignee: 'none', show_assignee: true)
     end
 
     desc "mine", "get open tickets assigned to me"
@@ -42,15 +43,13 @@ module GithubFlowCli
       show_assignee = config.delete(:show_assignee)
       defaults = { sort: :updated, direction: :desc }
       issues = API.list_issues(Local.repo, defaults.merge(config))
-      if issues.empty?
-        puts "no issue found."
-      else
+      unless issues.empty?
         puts issues.map { |i| "(#{i.updated_at}) ##{i.number}#{assignee_field(show_assignee, i)}: #{i.title}" }.join("\n")
       end
     end
 
     def assignee_field(show_assignee, issue)
-      show_assignee ? " (#{issue.assignee.login})" : ''
+      show_assignee ? " (#{issue.assignee&.login || 'NONE'})" : ''
     end
   end
 end
