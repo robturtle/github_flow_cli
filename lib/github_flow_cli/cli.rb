@@ -3,6 +3,8 @@ require_relative 'api'
 require_relative 'config'
 require_relative 'local'
 
+Dir[File.join(File.dirname(__FILE__), '../commands/*.rb')].each { |f| require f }
+
 module GithubFlowCli
   class CLI < Thor
     desc "login", "login to Github with username and password"
@@ -26,6 +28,9 @@ module GithubFlowCli
     def repo
       puts(Local.repo&.slug || "remote repo not found!")
     end
+
+    desc "issue", "manipulate issues"
+    subcommand "issue", IssueCommands
 
     private
 
