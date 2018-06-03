@@ -1,6 +1,7 @@
 require 'yaml'
 require 'fileutils'
 require_relative 'api'
+require_relative 'local'
 
 module GithubFlowCli
   class Config
@@ -26,6 +27,14 @@ module GithubFlowCli
           puts "please login first."
           exit(2)
         end
+      end
+
+      def link_branch_to_issue(issue)
+        self.branch_issue_map[Local.git.branch.name] = issue.number
+      end
+
+      def link_pr_to_branch(pr)
+        self.pr_branch_map[pr.number] = Local.git.branch.name
       end
 
       def load
