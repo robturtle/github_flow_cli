@@ -31,6 +31,7 @@ module GithubFlowCli
       issue = API.issue(Local.repo, number)
       # TODO: create branch based on RepoRules
       # TODO: abstarct tag from issue title
+      # TODO: link issue and branch
       branch_name = "i_#{number}_#{issue.title.gsub(/[^_\w\d ]/, '').snakecase}"
       Local.git.branch(branch_name).checkout
     rescue Octokit::NotFound
