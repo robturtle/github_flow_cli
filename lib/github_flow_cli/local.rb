@@ -4,7 +4,7 @@ module GithubFlowCli
   class Local
     class << self
       def repo
-        url = Git.open(File.expand_path('.')).remote.url
+        url = Git.open(File.expand_path('.')).remote.url.sub(/\.git$/, '')
         return nil unless url
         Octokit::Repository.from_url(url)
       rescue ArgumentError => ex
