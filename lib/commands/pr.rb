@@ -23,6 +23,8 @@ module GithubFlowCli
         puts "PR already exists."
         pr_number = Config.pr_branch_map.find {|_, v| v == Local.git.current_branch }.first
         puts API.pull_request(Local.repo, pr_number).html_url
+      when /missing_field/
+        puts "issue info lost, please provide the title"
       else
         raise
       end
