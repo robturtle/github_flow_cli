@@ -5,7 +5,7 @@ require_relative '../github_flow_cli/config'
 
 module GithubFlowCli
   class IssueCommands < Thor
-    desc "create", "create an issue"
+    desc "create TITLE", "create an issue"
     def create(title)
       puts API.create_issue(title).html_url
     end
