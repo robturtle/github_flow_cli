@@ -14,11 +14,15 @@ module GithubFlowCli
 
     desc "create TITLE", "create PR from current branch"
     def create(title = nil)
-      pr =  API.create_pr(title: title)
-      puts pr.html_url if pr
+      puts API.create_pr(title: title).html_url
     rescue Octokit::UnprocessableEntity => ex
-      if ex.message =~ /no commits between .*? and/i
+      case ex.message
+      when /no commits between .*? and/i
         puts "No commits between base and head, stop creating PR..."
+      when /already exists/
+        puts "PR already exists."
+        pr_number = Config.pr_branch_map.find {|_, v| v == Local.git.current_branch }.first
+        puts API.pull_request(Local.repo, pr_number).html_url
       else
         raise
       end

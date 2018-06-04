@@ -57,15 +57,16 @@ module GithubFlowCli
 
       # TODO: other options
       def create_pr(base: "master", title: nil, body: nil)
-        branch_name = Local.git.branch.name
+        branch_name = Local.git.current_branch
         issue_number = Config.branch_issue_map[branch_name]
         if issue_number
           issue = API.issue(Local.repo, issue_number)
           title ||= issue.title
           body ||= issue.body
         end
-        pr = @client.create_pull_request(Local.repo, base, branch_name, title, body)
-        Config.link_pr_to_branch(pr, branch_name)
+        @client.create_pull_request(Local.repo, base, branch_name, title, body).tap do |pr|
+          Config.link_pr_to_branch(pr, branch_name)
+        end
       end
 
       private
