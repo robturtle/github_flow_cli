@@ -24,6 +24,8 @@ For the very first version, I present a workflow that is 100% browser-free until
 
 ![image](https://user-images.githubusercontent.com/3524125/40894925-82156c58-6761-11e8-9f21-2d467426bd58.png)
 
+First make sure your working directory is under a git repository.
+
 1. When you're in ready position, check your ticket list via `hubflow issue mine`;
 2. Pick a ticket to work on via `hubflow issue start NUMBER`, this will create a branch based on the issue number and name;
 3. After you finished your work, just hit `hubflow pr create`, it will:
