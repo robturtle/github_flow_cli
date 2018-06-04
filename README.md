@@ -8,7 +8,7 @@ Normally how do you push your code to Github to resolve a ticket? Probably like 
 4. go to Github project home page, click "new pull request";
 5. redirect to "new pull request" page, fill in the title and other information.
 
-I always found it's wasting my time when doing the process above. Especially most of the time I type the same information again and again -- it's very likely the issue contents, the branch name, and the pr contents are connected. Also waiting response from the Chrome browser is not enjoyable.
+I always found it a waste of my time doing the process above. Especially most of the time I type the same information again and again -- it's very likely the issue contents, the branch name, and the pr contents are connected. Also waiting response from the Chrome browser is not enjoyable.
 
 This CLI tool is aiming to fasten the developing flow with Github by automating issue/PR creation according to the repo's convention. It's very new and primitive, but the goal is glory -- to make developing with Github as smoothly as possible!
 
