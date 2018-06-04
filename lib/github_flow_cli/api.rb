@@ -50,8 +50,22 @@ module GithubFlowCli
       # :assignee (String) — User login.
       # :milestone (Integer) — Milestone number.
       # :labels
+      # TODO: keywordify parameters
       def create_issue(title, body = nil, options = {})
         @client.create_issue(Local.repo, title, body, options)
+      end
+
+      # TODO: other options
+      def create_pr(base: "master", title: nil, body: nil)
+        branch_name = Local.git.branch.name
+        issue_number = Config.branch_issue_map[branch_name]
+        if issue_number
+          issue = API.issue(Local.repo, issue_number)
+          title ||= issue.title
+          body ||= issue.body
+        end
+        pr = @client.create_pull_request(Local.repo, base, branch_name, title, body)
+        Config.link_pr_to_branch(pr, branch_name)
       end
 
       private
