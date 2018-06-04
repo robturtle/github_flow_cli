@@ -13,8 +13,6 @@ module GithubFlowCli
       attr_accessor *KEYS
 
       def setup
-        self.branch_issue_map = {}
-        self.pr_branch_map = {}
         if File.file?(config_path)
           load
           API.use_oauth_token(oauth_token)
@@ -42,6 +40,8 @@ module GithubFlowCli
       end
 
       def save!
+        self.branch_issue_map ||= {}
+        self.pr_branch_map ||= {}
         File.open(config_path, 'w') { |f| f.write(to_h.to_yaml) }
       end
 
