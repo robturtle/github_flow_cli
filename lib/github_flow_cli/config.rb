@@ -29,12 +29,12 @@ module GithubFlowCli
         end
       end
 
-      def link_branch_to_issue(issue)
-        self.branch_issue_map[Local.git.branch.name] = issue.number
+      def link_branch_to_issue(branch_name, issue)
+        self.branch_issue_map[branch_name] = issue.number
       end
 
-      def link_pr_to_branch(pr)
-        self.pr_branch_map[pr.number] = Local.git.branch.name
+      def link_pr_to_branch(pr, branch_name)
+        self.pr_branch_map[pr.number] = branch_name
       end
 
       def load

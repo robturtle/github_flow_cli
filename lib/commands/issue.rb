@@ -33,7 +33,7 @@ module GithubFlowCli
       # TODO: abstarct tag from issue title
       branch_name = "i_#{number}_#{issue.title.gsub(/[^_\w\d ]/, '').snakecase}"
       Local.git.branch(branch_name).checkout
-      Config.link_branch_to_issue(issue)
+      Config.link_branch_to_issue(branch_name, issue)
     rescue Octokit::NotFound
       puts "issue not found!"
     end
