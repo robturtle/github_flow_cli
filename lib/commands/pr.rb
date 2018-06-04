@@ -8,7 +8,7 @@ module GithubFlowCli
     def all
       # TODO: before filer
       unless Local.repo
-        puts "not valid outside of a git repo."
+        puts "not valid outside of a github repo."
         exit(4)
       end
       pull_requests = API.pull_requests(Local.repo)
@@ -21,7 +21,7 @@ module GithubFlowCli
     def create(title = nil)
       # TODO: before filer
       unless Local.repo
-        puts "not valid outside of a git repo."
+        puts "not valid outside of a github repo."
         exit(4)
       end
       puts API.create_pr(title: title).html_url

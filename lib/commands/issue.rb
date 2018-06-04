@@ -30,7 +30,7 @@ module GithubFlowCli
     def start(number)
       # TODO: before filer
       unless Local.repo
-        puts "not valid outside of a git repo."
+        puts "not valid outside of a github repo."
         exit(4)
       end
       issue = API.issue(Local.repo, number)
