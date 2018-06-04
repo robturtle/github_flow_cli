@@ -11,5 +11,10 @@ module GithubFlowCli
         puts pull_requests.map { |p| "##{p.number} (#{p.assignee&.login || "NONE"}): #{p.title}" }
       end
     end
+
+    desc "create TITLE", "create PR from current branch"
+    def create(title = nil)
+      API.create_pr(title: title)
+    end
   end
 end
