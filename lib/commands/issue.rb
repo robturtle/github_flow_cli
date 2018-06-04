@@ -28,6 +28,11 @@ module GithubFlowCli
 
     desc "start", "create a new branch named after the issue"
     def start(number)
+      # TODO: before filer
+      unless Local.repo
+        puts "not valid outside of a git repo."
+        exit(4)
+      end
       issue = API.issue(Local.repo, number)
       # TODO: create branch based on RepoRules
       # TODO: abstarct tag from issue title
