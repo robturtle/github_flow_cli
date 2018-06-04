@@ -18,7 +18,16 @@ module GithubFlowCli
       end
 
       def git
-        @git ||= Git.open(File.expand_path('.'))
+        @git ||= Git.open(git_dir)
+      end
+
+      def git_dir
+        current = File.expand_path('.')
+        while !File.directory?(File.join(current, '.git'))
+          current = File.dirname(current)
+          break if current == '/'
+        end
+        current
       end
     end
   end
