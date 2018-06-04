@@ -18,6 +18,12 @@ This CLI tool is aiming to fasten the developing flow with Github by automating 
 gem install github_flow_cli
 ```
 
+You will need use your Github credentials to grant access to this app:
+
+```
+hubflow login
+```
+
 ## Usage
 
 For the very first version, I present a workflow that is 100% browser-free until the PR reviewing phase. Here's an example:
