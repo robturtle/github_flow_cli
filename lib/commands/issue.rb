@@ -45,7 +45,7 @@ module GithubFlowCli
       defaults = { sort: :updated, direction: :desc }
       issues = API.list_issues(Local.repo, defaults.merge(config))
       unless issues.empty?
-        puts issues.map { |i| "(#{i.updated_at}) ##{i.number}#{assignee_field(show_assignee, i)}: #{i.title}" }.join("\n")
+        puts issues.map { |i| "##{i.number}#{assignee_field(show_assignee, i)}: #{i.title}" }.join("\n")
       end
     end
 
