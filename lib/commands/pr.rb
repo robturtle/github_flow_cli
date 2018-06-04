@@ -8,7 +8,7 @@ module GithubFlowCli
     def all
       pull_requests = API.pull_requests(Local.repo)
       unless pull_requests.empty?
-        puts pull_requests.map { |p| "##{p.number} (#{p.assignee&.login || "NONE"}): #{p.title}" }
+        puts pull_requests.map { |p| "#{Local.repo ? '' : i.repository.name}##{p.number} (#{p.assignee&.login || "NONE"}): #{p.title}" }
       end
     end
 
