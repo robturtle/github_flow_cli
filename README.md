@@ -1,20 +1,55 @@
 # GithubFlowCli
 
-This CLI tool is aiming to fasten the developing flow with Github by automating issue/PR creation according to the repo's convention.
+Normally how do you push your code to Github to resolve a ticket? Probably like this:
+
+1. go to Github issues page or your task manager, create a ticket;
+2. create a branch locally;
+3. finish your work, push it to Github;
+4. go to Github project home page, click "new pull request";
+5. redirect to "new pull request" page, fill in the title and other information.
+
+I always found it's wasting my time when doing the process above. Especially most of the time I type the same information again and again -- it's very likely the issue contents, the branch name, and the pr contents are connected. Also waiting response from the Chrome browser is not enjoyable.
+
+This CLI tool is aiming to fasten the developing flow with Github by automating issue/PR creation according to the repo's convention. It's very new and primitive, but the goal is glory -- to make developing with Github as smoothly as possible!
 
 ## Installation
 
-This gem is not published yet. For now please clone the repo and run the app via:
-
 ```
-rake build
-gem install pkg/*.gem
-hubflow help
+gem install github_flow_cli
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+For the very first version, I present a workflow that is 100% browser-free until the PR reviewing phase. Here's an example:
+
+![image](https://user-images.githubusercontent.com/3524125/40894925-82156c58-6761-11e8-9f21-2d467426bd58.png)
+
+1. When you're in ready position, check your ticket list via `hubflow issue mine`;
+2. Pick a ticket to work on via `hubflow issue start NUMBER`, this will create a branch based on the issue number and name;
+3. After you finished your work, just hit `hubflow pr create`, it will:
+   1. create a remote branch; 
+   2. set upstream;
+   3. push code;
+   4. create PR based on the issue title.
+   
+And you can just copy the PR URL from the CLI output to your boss to request a review.
+
+You can also create an issue via `hubflow issue create TITLE`
+![image](https://user-images.githubusercontent.com/3524125/40895228-ee1c56a4-6762-11e8-9e5f-5efc4f6b90f7.png)
+
+For other commands please refer to:
+```
+hubflow help
+```
+
+There's a huge room to improve, including but not limited to:
+
+- custom issue title/branch name/PR title template
+- custom issue body/PR body template
+- interactive UI
+- more automations
+
+If you like this idea, not hesitate to join the development!
 
 ## Development
 
