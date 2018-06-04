@@ -14,7 +14,14 @@ module GithubFlowCli
 
     desc "create TITLE", "create PR from current branch"
     def create(title = nil)
-      API.create_pr(title: title)
+      pr =  API.create_pr(title: title)
+      puts pr.html_url if pr
+    rescue Octokit::UnprocessableEntity => ex
+      if ex.message =~ /no commits between .*? and/i
+        puts "No commits between base and head, stop creating PR..."
+      else
+        raise
+      end
     end
   end
 end
