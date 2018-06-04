@@ -44,7 +44,7 @@ module GithubFlowCli
       show_assignee = config.delete(:show_assignee)
       issues = API.list_issues(Local.repo, config)
       unless issues.empty?
-        puts issues.sort_by(&:title).map { |i| "##{i.number}#{assignee_field(show_assignee, i)}: #{i.title}" }.join("\n")
+        puts issues.sort_by(&:title).map { |i| "#{Local.repo ? '' : i.repository.name}##{i.number}#{assignee_field(show_assignee, i)}: #{i.title}" }.join("\n")
       end
     end
 
