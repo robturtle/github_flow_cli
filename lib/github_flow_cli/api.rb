@@ -66,8 +66,13 @@ module GithubFlowCli
         end
         unless Local.git.branches.remote.find { |b| b.name == branch_name }
           # TODO: custom default remote
-          Local.git.push('origin', branch_name)
+          puts "no remote branch found, creating remote branch..."
+          Local.git.config("branch.#{branch_name}.remote", 'origin')
+          Local.git.config("branch.#{branch_name}.merge", "refs/heads/#{branch_name}")
         end
+        # TODO: custom default remote
+        puts "git push..."
+        Local.git.push('origin', branch_name)
         @client.create_pull_request(Local.repo, base, branch_name, title, body).tap do |pr|
           Config.link_pr_to_branch(pr, branch_name)
         end
