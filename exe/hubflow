@@ -6,5 +6,7 @@ begin
 rescue Interrupt => e
   puts "\nbye."
 ensure
-  GithubFlowCli::Config.save!
+  if GithubFlowCli::Config.valid?
+    GithubFlowCli::Config.save!
+  end
 end
