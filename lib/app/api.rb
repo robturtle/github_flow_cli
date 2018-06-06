@@ -5,6 +5,7 @@ module GithubFlowCli
   class API; end
   class << API
     # @return [String] OAuth token
+    # @raises [Octokit::Unauthorized]
     def authorize(username, password, two_factor_token: nil)
       client = Octokit::Client.new(login: username, password: password)
       auth_config = {
@@ -25,6 +26,7 @@ module GithubFlowCli
       end
     end
 
+    # TODO: AOP this: for the first API call, run this call once
     def use_oauth_token(token)
       @client = Octokit::Client.new(access_token: token)
     end
@@ -35,6 +37,7 @@ module GithubFlowCli
       false
     end
 
+    # TODO: use SimpleDelegator
     # delegate API calls to Octokit::Client
     def method_missing(method, *args, &block)
       if @client.respond_to?(method)
@@ -70,6 +73,7 @@ module GithubFlowCli
         Local.git.config("branch.#{branch_name}.remote", 'origin')
         Local.git.config("branch.#{branch_name}.merge", "refs/heads/#{branch_name}")
       end
+      # TODO: try get the remote config from Local
       # TODO: custom default remote
       puts "git push..."
       Local.git.push('origin', branch_name)
